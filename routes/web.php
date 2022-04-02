@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\RiderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::controller(ClientController::class)->group(function() {
+    // Route::get("/users", "viewLoad");
+    Route::get("/client-signup", "clientSignup");
+    Route::get("/client-login", "clientLogin");
+});
+
+Route::controller(RiderController::class)->group(function() {
+    // Route::get("/users", "viewLoad");
+    Route::get("/rider-signup", "riderSignup");
+    Route::get("/rider-login", "riderLogin");
+});
