@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div
-                        class=" col left-links d-flex flex-column justify-content-end align-items-center display-8 text-white pb-4">
+                        class="col left-links d-flex flex-column justify-content-end align-items-center display-8 text-white pb-4">
                         <div class="links">
                             <a href="#" class="link-light text-decoration-none pe-md-1 pe-2">Terms and Conditions</a>
                             |

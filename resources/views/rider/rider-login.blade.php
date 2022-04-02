@@ -112,12 +112,12 @@
         $(() => {
             $('.password-icon').click(function() {
                 let getUrl = window.location;
-                let baseUrl = `${getUrl.protocol}//${getUrl.host}/${getUrl.pathname.split('/')[2]}`;
-                if ($(this).attr('src') === `${baseUrl}/public/assets/img/visible-eye.png`) {
-                    $(this).attr('src', `${baseUrl}/public/assets/img/blind.png`);
+                let baseUrl = `${getUrl.protocol}//${getUrl.host}/${getUrl.pathname.split('/')[0]}`;
+                if ($(this).attr('src') === `${baseUrl}img/visible-eye.png`) {
+                    $(this).attr('src', `${baseUrl}img/blind.png`);
                     $('.password-container').attr('type', 'password');
                 } else {
-                    $(this).attr('src', `${baseUrl}/public/assets/img/visible-eye.png`);
+                    $(this).attr('src', `${baseUrl}img/visible-eye.png`);
                     $('.password-container').attr('type', 'text');
                 }
             });
