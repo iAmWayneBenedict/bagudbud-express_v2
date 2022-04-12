@@ -83,37 +83,6 @@
                         </div>
                     </div>
 
-
-                    <!-- Gender and Birthdate row -->
-
-                    <!-- Gender -->
-
-                    <div class="row row-cols-1 row-cols-lg-2">
-                        <div class="col ps-1 ps-lg-2 ps-xxl-5">
-                            <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
-                                <label for="gender"
-                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Gender</label>
-                                <select name="gender" class="form-select form-select-md py-xl-2 py-xxl-3 fw-lighter"
-                                    id="gender" aria-label="Default select example">
-                                    <option selected>Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Birthday -->
-
-                        <div class="col ps-1 pe-lg-2 pe-xxl-5">
-                            <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
-                                <label for="gender"
-                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Birthdate</label>
-                                <input type="date" name="birthdate" id="dirthdate"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter">
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- <hr class="border border-0 border-top-1 border-black opacity-10"> -->
 
                     <!-- Phone Number and Email row -->
