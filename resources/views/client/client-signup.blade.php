@@ -33,7 +33,7 @@
 
             <div class="col col-md-8 px-xl-5 mx-auto py-5 my-4">
                 <form method="POST" class="container" id="form">
-
+                    @csrf
                     <div class="row row-cols-1 row-cols-lg-2 mb-5">
                         <div class="col d-flex justify-content-center align-items-center px-1 px-lg-2 px-xxl-5">
                             <img src="{{ asset('img/logo.png') }}" class="w-75 img-fluid" alt="logo">
@@ -63,9 +63,11 @@
                                 <label for="first-name"
                                     class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">First
                                     name</label>
-                                <input type="text" name="first-name"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="first-name"
+                                <input type="text" name="f_name"
+                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="f_name"
                                     placeholder="First name">
+                                <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                    message!</span>
                             </div>
                         </div>
 
@@ -76,9 +78,11 @@
                                 <label for="last-name"
                                     class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Last
                                     name</label>
-                                <input type="text" name="last-name"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="last-name"
+                                <input type="text" name="l_name"
+                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="l_name"
                                     placeholder="Last name">
+                                <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                    message!</span>
                             </div>
                         </div>
                     </div>
@@ -89,14 +93,14 @@
 
                     <!-- Phone number -->
 
-                    <div class="row row-cols-1 row-cols-lg-2 mt-3">
+                    <div class="row row-cols-1 row-cols-lg-2 mt-2">
                         <div class="col ps-1 ps-lg-2 ps-xxl-5">
                             <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
                                 <label for="phone-number"
                                     class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Phone
                                     number</label>
-                                <input type="number" name="phone-number"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="phone-number"
+                                <input type="number" name="contact_num"
+                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="contact_num"
                                     placeholder="Phone number">
                                 <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
                                     message!</span>
@@ -118,11 +122,8 @@
                         </div>
                     </div>
 
-                    <!-- Password and Confirm Password row -->
 
-                    <!-- Password -->
-
-                    <div class="row row-cols-1 row-cols-lg-2">
+                    <div class="row row-cols-1 row-cols-lg-2 mt-2">
                         <div class="col ps-1 ps-lg-2 ps-xxl-5">
                             <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
                                 <label for="password"
@@ -135,85 +136,77 @@
                             </div>
                         </div>
 
-                        <!-- Confirm Password -->
+                        <!-- Email -->
 
                         <div class="col ps-1 pe-lg-2 pe-xxl-5">
-                            <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
-                                <label for="confirm-password"
-                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Confirm
-                                    Password</label>
-                                <input type="password" name="confirm-password"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="confirm-password"
-                                    placeholder="Confirm Password">
-                                <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
-                                    message!</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Municipality and Barangay row -->
-
-                    <!-- Municipality -->
-
-                    <div class="row row-cols-1 row-cols-lg-2 mt-3">
-                        <div class="col ps-1 ps-lg-2 ps-xxl-5">
                             <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
                                 <label for="municipality"
-                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Municipality</label>
-                                <input class="form-control form-control-sm py-2 py-xxl-3 fw-lighter"
-                                    list="municipality-list" id="municipality" placeholder="Municipality"
-                                    name="municipality">
-                                <datalist id="municipality-list">
-                                    <option value="Baao">
-                                    <option value="Bato">
-                                    <option value="Balatan">
-                                    <option value="Bula">
-                                    <option value="Buhi">
-                                    <option value="Nabua">
-                                    <option value="Iriga City">
-                                </datalist>
-                            </div>
-                        </div>
-
-                        <!-- Barangay -->
-
-                        <div class="col ps-1 pe-lg-2 pe-xxl-5">
-                            <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
-                                <label for="barangay"
-                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Barangay</label>
-                                <input type="text" name="barangay"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="barangay"
-                                    placeholder="Barangay">
+                                class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Municipality</label>
+                            <input class="form-control form-control-sm py-2 py-xxl-3 fw-lighter"
+                                list="municipality-list" id="municipality" placeholder="Municipality"
+                                name="municipality">
+                            <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                message!</span>
+                            <datalist id="municipality-list">
+                                <option value="Baao">
+                                <option value="Bato">
+                                <option value="Balatan">
+                                <option value="Bula">
+                                <option value="Buhi">
+                                <option value="Nabua">
+                                <option value="Iriga City">
+                            </datalist>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Zone or Street -->
+                    <!-- zone and Barangay row -->
 
                     <div class="row row-cols-1 row-cols-lg-2">
                         <div class="col ps-1 ps-lg-2 ps-xxl-5">
                             <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
-                                <label for="zone-street"
-                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Zone
-                                    / Street</label>
-                                <input type="text" name="zone-street"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="zone-street"
-                                    placeholder="Zone or Street">
+                                <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
+                                    <label for="barangay"
+                                        class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Barangay</label>
+                                    <input type="text" name="barangay"
+                                        class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="barangay"
+                                        placeholder="Barangay">
+                                    <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                        message!</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+
+                        <div class="col ps-1 pe-lg-2 pe-xxl-5">
+                            <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
+                                <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
+                                    <label for="zone-street"
+                                        class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Zone
+                                        / Street</label>
+                                    <input type="text" name="zone"
+                                        class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="zone"
+                                        placeholder="Zone or Street">
+                                    <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                        message!</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Client Shop Name -->
 
-                    <div class="row row-cols-1 row-cols-lg-2 mt-3">
+                    <div class="row row-cols-1 row-cols-lg-2 mt-2">
                         <div class="col ps-1 ps-lg-2 ps-xxl-5">
                             <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
                                 <label for="client-shop-name"
                                     class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Shop
                                     Name</label>
-                                <input type="text" name="client-shop-name"
-                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="client-shop-name"
+                                <input type="text" name="business_name"
+                                    class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="business_name"
                                     placeholder="Shop Name">
+                                <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                    message!</span>
                             </div>
                         </div>
 
@@ -225,8 +218,8 @@
                                     class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Product
                                     Type</label>
                                 <select class="form-select form-select-sm py-2 py-xxl-3 fw-lighter"
-                                    aria-label=".form-select-sm example" name="product-name">
-                                    <option selected>All</option>
+                                    aria-label=".form-select-sm example" name="product_type">
+                                    <option value="All" selected>All</option>
                                     <option value="Beauty Products">Beauty Products</option>
                                     <option value="Fashion">Fashion</option>
                                     <option value="Food">Food</option>
@@ -276,4 +269,36 @@
             </div>
         </div>
     </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script>
+        $(document).ready(function () {
+            $('#form').submit(function (e) { 
+                e.preventDefault();
+
+                alert('Good');
+                const fdata = new FormData(this);
+                $.ajax({
+                    url: '{{ route('store')}}',
+                    method: 'post',
+                    data: fdata,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: function (res) {
+                        if(res.code == 200){
+                            alert(res.mssg);
+                            //it should be clear the form inputs and alert a message
+                        }
+                        if(res.code == 404){
+                            $('.text-danger').addClass('d-none');
+                            $.each(res.errors, function (key, val) { 
+                                $(`#${key}`).next().text(val).removeClass('d-none');
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
