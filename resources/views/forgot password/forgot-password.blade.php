@@ -70,6 +70,27 @@
                 $('#get-code').css('display', 'none')
                 $('#password, #confirmation-code, #confirm').removeAttr("disabled");
             })
+
+            let temp = "";
+            $('#confirmation-code').keyup(function(event) {
+
+                // if the input field is empty, then reset temp variable and immediately exit the function
+                if (!$(this).val()) {
+                    temp = '';
+                    return;
+                }
+
+                // if the clicked key is not a number, then remove the latest character added
+                let rawData = $(this).val();
+                if (isNaN(parseInt(event.key))) {
+                    $(this).val(rawData.slice(0, this.value.length - 1));
+                    return;
+                }
+
+                // store to the temp variable the last char added
+                temp += $(this).val().charAt(this.value.length - 1);
+                $(this).val(temp);
+            })
         })
     </script>
 @endsection
