@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
 
 use App\Rules\ContactNumber;
 use Illuminate\Http\Request;
 use App\Mail\RegisterSendEmail;
 use App\Models\Client\ClientModel;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
