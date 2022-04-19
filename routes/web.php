@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\RiderController;
+use App\Http\Controllers\ForgotPassController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ Route::controller(RiderController::class)->group(function() {
     Route::get("/rider-signup", "riderSignup");
     Route::get("/rider-login", "riderLogin");
 });
+
+Route::get('/forgot-password', [ForgotPassController::class, 'index']);
