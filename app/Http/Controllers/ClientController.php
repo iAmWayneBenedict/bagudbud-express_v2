@@ -102,4 +102,31 @@ class ClientController extends Controller
     public function clientLogin() {
         return view('client.client-login');
     }
+
+    public function login_Auth(Request $request){
+        
+        //validate all client/user inputs
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
+
+        $client_model = new ClientModel();
+        $login_response = $client_model->login_process($request->email, $request->password);
+
+        switch ($login_response) {
+            case 1:
+                return back()->with('fail', 'Your Account is not verified, Check your email');
+                break;
+            case 2:
+                return back()->with('fail', 'Email address not found');
+                break;
+            case 3:
+                return back()->with('fail', 'Password not match');
+                break;
+            default:
+                // $request->session()->put('user_id', $login_response);
+                return back()->with('success', $login_response);
+        }   
+    }
 }

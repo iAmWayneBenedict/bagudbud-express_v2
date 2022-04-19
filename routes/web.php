@@ -29,6 +29,7 @@ Route::controller(ClientController::class)->group(function() {
     Route::get("/client-signup", "clientSignup");
     Route::post("/store", "store")->name("store");
     Route::get("/client-login", "clientLogin");
+    Route::post("/login_Auth", "login_Auth")->name("login_Auth");
 });
 
 Route::controller(RiderController::class)->group(function() {

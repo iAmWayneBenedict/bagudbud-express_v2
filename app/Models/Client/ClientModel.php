@@ -63,7 +63,7 @@ class ClientModel extends Model
             }
             else{
                 if(Hash::check($password, $login->password)){
-                    return $success;
+                    return $login->client_id;
                 }
                 else{
                     return $wrong_password;
