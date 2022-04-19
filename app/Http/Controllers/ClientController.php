@@ -71,16 +71,21 @@ class ClientController extends Controller
             'v_key' => $verification_key
         ];
 
-        if(ClientModel::create($input_data)){
+        $insert = ClientModel::create($input_data);
+        if($insert){
+            
+            //get last inserted id and insert into client_records table
+            $last_id = $insert->id;
+            ClientModel::create_record(['client_id' => $last_id]);
 
             $data = ['vkey' => $verification_key];
 
             // Mail::to($email)->send(new RegisterSendEmail($data));
             return response()->json([ 
                 'code' => 200,
-                'mssg' => "Check your email, We sent a verification mail to {$email}"
+                'msg' => $last_id
             ]);
-        }      
+        }     
     
     }
 

@@ -41,6 +41,14 @@ class ClientModel extends Model
         }
     }
 
+    public static function create_record($id){
+        /*
+        param: $id :from the user
+        return: none
+        */
+        DB::table('client_records')->insert($id);
+    }
+
     public function login_process($email, $password){
         /* 
             param: email: client email for the account
