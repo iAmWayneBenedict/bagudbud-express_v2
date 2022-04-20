@@ -11,29 +11,42 @@
                     <div class="col form-container d-flex flex-column justify-content-center align-items-center my-3">
                         <img src="{{ asset('img/logo.png') }}" class="logo-form img-fluid w-75 mb-4 mb-xxl-5 px-5 pb-3"
                             alt="logo">
-                        <form action="" method="POST" class="container d-flex flex-column" id="log_form">
+                        <form action="{{ url('login_Auth')}}" method="POST" class="container d-flex flex-column" id="log_form">
+                            @csrf
                             <div class="d-inline-flex mb-2 mb-xxl-3">
                                 <h3 class="signin-title title position-relative fw-bolder display-4">Sign in</h3>
                             </div>
 
                             <!-- Error message -->
-                            @if (false)
+                            @if (Session::has('fail'))
                                 <div class="alert alert-danger d-flex justify-content-center align-items-center p-2 py-3"
                                     role="alert">
                                     <p class="display-7 m-0 fw-normal">
                                         {{-- Message Here --}}
+                                        {{Session::get('fail')}}
                                     </p>
                                 </div>
                             @endif
+                            @if (Session::has('success'))
+                            <div class="alert alert-danger d-flex justify-content-center align-items-center p-2 py-3"
+                                role="alert">
+                                <p class="display-7 m-0 fw-normal">
+                                    {{-- Message Here --}}
+                                    {{Session::get('success')}}
+                                </p>
+                            </div>
+                        @endif
 
                             <!-- End of error message -->
 
                             <div class="mb-2 mb-xxl-3">
                                 <label for="emailOrUsername"
-                                    class="form-label col-form-label col-form-label-sm display-7 fw-normal">Email or
-                                    Username</label>
+                                    class="form-label col-form-label col-form-label-sm display-7 fw-normal">Email</label>
                                 <input type="email" name="email" class="form-control form-control-sm py-2 py-xxl-3 fw-light"
                                     id="emailOrUsername" placeholder="Email or Username">
+                                    <span class="text-danger text-center display-8 fw-bold mt-2 alerts">@error('email')
+                                        {{$message}}
+                                    @enderror</span>
                             </div>
                             <div class="mb-1 mb-xxl-2">
                                 <label for="password"
@@ -48,6 +61,9 @@
                                             style="width: 1.25rem;" alt="">
                                     </span>
                                 </div>
+                                <span class="text-danger text-center display-8 fw-bold mt-2 alerts">@error('password')
+                                    {{$message}}
+                                @enderror</span>
                             </div>
                             <div class="join-now-container d-flex justify-content-between flex-row-reverse px-xl-1">
                                 <div class="form-check">
@@ -58,7 +74,7 @@
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
                                     <p class="overflow-hidden">
-                                        <a href=""
+                                        <a href="{{route('forgot-password')}}"
                                             class="display-7 fw-bold link-dark text-decoration-none position-relative overflow-hidden a-link ms-1 pb-0">Forgot
                                             Password?</a>
                                     </p>

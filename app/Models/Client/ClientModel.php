@@ -41,6 +41,14 @@ class ClientModel extends Model
         }
     }
 
+    public static function create_record($id){
+        /*
+        param: $id :from the user
+        return: none
+        */
+        DB::table('client_records')->insert($id);
+    }
+
     public function login_process($email, $password){
         /* 
             param: email: client email for the account
@@ -63,7 +71,7 @@ class ClientModel extends Model
             }
             else{
                 if(Hash::check($password, $login->password)){
-                    return $success;
+                    return $login->client_id;
                 }
                 else{
                     return $wrong_password;

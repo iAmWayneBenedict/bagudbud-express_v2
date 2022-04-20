@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
 
 use App\Rules\ContactNumber;
 use Illuminate\Http\Request;
 use App\Mail\RegisterSendEmail;
 use App\Models\Client\ClientModel;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -71,16 +72,21 @@ class ClientController extends Controller
             'v_key' => $verification_key
         ];
 
-        if(ClientModel::create($input_data)){
+        $insert = ClientModel::create($input_data);
+        if($insert){
+            
+            //get last inserted id and insert into client_records table
+            $last_id = $insert->id;
+            ClientModel::create_record(['client_id' => $last_id]);
 
             $data = ['vkey' => $verification_key];
 
             // Mail::to($email)->send(new RegisterSendEmail($data));
             return response()->json([ 
                 'code' => 200,
-                'mssg' => "Check your email, We sent a verification mail to {$email}"
+                'msg' => $last_id
             ]);
-        }      
+        }     
     
     }
 
@@ -101,5 +107,32 @@ class ClientController extends Controller
 
     public function clientLogin() {
         return view('client.client-login');
+    }
+
+    public function login_Auth(Request $request){
+        
+        //validate all client/user inputs
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
+
+        $client_model = new ClientModel();
+        $login_response = $client_model->login_process($request->email, $request->password);
+
+        switch ($login_response) {
+            case 1:
+                return back()->with('fail', 'Your Account is not verified, Check your email');
+                break;
+            case 2:
+                return back()->with('fail', 'Email address not found');
+                break;
+            case 3:
+                return back()->with('fail', 'Password not match');
+                break;
+            default:
+                // $request->session()->put('user_id', $login_response);
+                return back()->with('success', $login_response);
+        }   
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\RiderController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForgotPassController;
+use App\Http\Controllers\client\ClientController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\rider\RiderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::controller(ClientController::class)->group(function() {
     Route::get("/client-signup", "clientSignup");
     Route::post("/store", "store")->name("store");
     Route::get("/client-login", "clientLogin");
+    Route::post("/login_Auth", "login_Auth")->name("login_Auth");
 });
 
 Route::controller(RiderController::class)->group(function() {
@@ -38,4 +40,9 @@ Route::controller(RiderController::class)->group(function() {
     Route::get("/rider-login", "riderLogin");
 });
 
-Route::get('/forgot-password', [ForgotPassController::class, 'index']);
+Route::controller(ForgotPassController::class)->group(function () {
+    Route::get('/forgot-password', 'index')->name('forgot-password');
+    Route::post('/client_SC', 'client_send_code')->name('client_SC');
+    Route::post('/rider_SC', 'rider_send_code')->name('rider_SC');
+    Route::post('/client_RC', 'client_reset_code')->name('client_RC');
+});

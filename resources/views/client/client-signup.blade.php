@@ -304,7 +304,7 @@
             $('#form').submit(function(e) {
                 e.preventDefault();
 
-                alert('Good');
+                // alert('Good');
                 const fdata = new FormData(this);
                 $.ajax({
                     url: '{{ route('store') }}',
