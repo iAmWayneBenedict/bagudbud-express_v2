@@ -5,7 +5,7 @@
         <div style="max-width: 30rem; width: 100%" class="p-5">
             <h1 class="mb-3 text-center fs-1">Reset Password</h1>
             <p class="mb-4 text-secondary">Fear not! We'll email you instructions to reset your password.</p>
-            <form>
+            <form action="{{ asset('json/locations.json') }}" method="GET">
                 <div class="mb-2 mb-xxl-3">
                     <label for="email" class="form-label col-form-label col-form-label-sm display-7 fw-normal">Email </label>
                     <input type="email" name="email" class="form-control form-control-sm py-2 py-xxl-3 fw-light" id="email"
@@ -38,7 +38,7 @@
                     <button type="button" id="get-code"
                         class="btn btn-outline-primary btn-block mb-4 flex-grow-1 py-2 me-1">Send
                         Code</button>
-                    <button type="button" id="confirm" class="btn btn-primary btn-block mb-4 flex-grow-1 py-2 ms-1"
+                    <button type="submit" id="confirm" class="btn btn-primary btn-block mb-4 flex-grow-1 py-2 ms-1"
                         disabled>Confirm</button>
                 </div>
 
