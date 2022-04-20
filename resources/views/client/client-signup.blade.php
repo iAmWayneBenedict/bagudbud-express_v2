@@ -141,21 +141,21 @@
                         <div class="col ps-1 pe-lg-2 pe-xxl-5">
                             <div class="mt-xxl-3 mb-lg-2 d-flex flex-column">
                                 <label for="municipality"
-                                class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Municipality</label>
-                            <input class="form-control form-control-sm py-2 py-xxl-3 fw-lighter"
-                                list="municipality-list" id="municipality" placeholder="Municipality"
-                                name="municipality">
-                            <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
-                                message!</span>
-                            <datalist id="municipality-list">
-                                <option value="Baao">
-                                <option value="Bato">
-                                <option value="Balatan">
-                                <option value="Bula">
-                                <option value="Buhi">
-                                <option value="Nabua">
-                                <option value="Iriga City">
-                            </datalist>
+                                    class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Municipality</label>
+                                <input class="form-control form-control-sm py-2 py-xxl-3 fw-lighter"
+                                    list="municipality-list" id="municipality" placeholder="Municipality"
+                                    name="municipality">
+                                <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                    message!</span>
+                                <datalist id="municipality-list">
+                                    <option value="Baao">
+                                    <option value="Bato">
+                                    <option value="Balatan">
+                                    <option value="Bula">
+                                    <option value="Buhi">
+                                    <option value="Nabua">
+                                    <option value="Iriga City">
+                                </datalist>
                             </div>
                         </div>
                     </div>
@@ -169,9 +169,12 @@
                                         class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Barangay</label>
                                     <input type="text" name="barangay"
                                         class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="barangay"
-                                        placeholder="Barangay">
+                                        placeholder="Barangay" list="barangay-list">
                                     <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
                                         message!</span>
+                                    <datalist id="barangay-list">
+
+                                    </datalist>
                                 </div>
                             </div>
                         </div>
@@ -271,28 +274,54 @@
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <script>
-        $(document).ready(function () {
-            $('#form').submit(function (e) { 
+        function barangayAddress(barangayList) {
+            barangayList.map(function(data) {
+                // append option tag with a value of specific barangay in the DOM
+                $('#barangay-list').append(`<option value="${data}">`);
+            });
+        }
+        $(document).ready(function() {
+            $('#municipality').change(async function() {
+                // fetch the locations data from locations.json file
+                let response = await fetch("{{ asset('json/locations.json') }}");
+                let data = await response.json();
+
+                // get the value inputed
+                let address = $(this).val();
+                // clear the datalist in barangay
+                $('#barangay-list').empty()
+                // clear input field
+                $('#barangay').val('')
+                //loop throught the object, then check if the inputed data is equal to the data found in json file
+                Object.entries(data).forEach(function([key, value]) {
+                    if (key.toLowerCase() === address.toLowerCase()) {
+                        barangayAddress(value);
+                        return;
+                    }
+                });
+            });
+
+            $('#form').submit(function(e) {
                 e.preventDefault();
 
                 // alert('Good');
                 const fdata = new FormData(this);
                 $.ajax({
-                    url: '{{ route('store')}}',
+                    url: '{{ route('store') }}',
                     method: 'post',
                     data: fdata,
                     cache: false,
                     contentType: false,
                     processData: false,
                     dataType: "json",
-                    success: function (res) {
-                        if(res.code == 200){
+                    success: function(res) {
+                        if (res.code == 200) {
                             alert(res.mssg);
                             //it should be clear the form inputs and alert a message
                         }
-                        if(res.code == 404){
+                        if (res.code == 404) {
                             $('.text-danger').addClass('d-none');
-                            $.each(res.errors, function (key, val) { 
+                            $.each(res.errors, function(key, val) {
                                 $(`#${key}`).next().text(val).removeClass('d-none');
                             });
                         }

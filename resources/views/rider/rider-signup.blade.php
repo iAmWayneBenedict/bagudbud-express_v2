@@ -212,7 +212,12 @@
                                     class="fw-bold display-7 form-label col-form-label col-form-label-sm mt-1 mt-lg-0">Barangay</label>
                                 <input type="text" name="barangay"
                                     class="form-control form-control-sm py-2 py-xxl-3 fw-lighter" id="barangay"
-                                    placeholder="Barangay">
+                                    placeholder="Barangay" list="barangay-list">
+                                <span class="text-danger text-center display-8 fw-bold mt-2 d-none alerts">Error
+                                    message!</span>
+                                <datalist id="barangay-list">
+
+                                </datalist>
                             </div>
                         </div>
                     </div>
@@ -346,4 +351,28 @@
             </div>
         </div>
     </div>
+    <script>
+        function barangayAddress(barangayList) {
+            barangayList.map(function(data) {
+                $('#barangay-list').append(`<option value="${data}">`);
+            });
+        }
+        $(() => {
+            $('#municipality').change(async function() {
+                let response = await fetch("{{ asset('json/locations.json') }}");
+                let data = await response.json();
+
+                let address = $(this).val();
+                $('#barangay-list').empty()
+                $('#barangay').val('')
+                Object.entries(data).forEach(function([key, value]) {
+                    if (key.toLowerCase() === address.toLowerCase()) {
+                        barangayAddress(value);
+                        return;
+                    }
+                });
+            });
+
+        })
+    </script>
 @endsection
