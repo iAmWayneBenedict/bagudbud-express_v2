@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForgotPassController;
 use App\Http\Controllers\client\ClientController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\rider\RiderController;
 
 /*
@@ -45,4 +44,5 @@ Route::controller(ForgotPassController::class)->group(function () {
     Route::post('/client_SC', 'client_send_code')->name('client_SC');
     Route::post('/rider_SC', 'rider_send_code')->name('rider_SC');
     Route::post('/client_RC', 'client_reset_code')->name('client_RC');
+    Route::post('/rider_RC', 'rider_reset_code')->name('rider_RC');
 });
