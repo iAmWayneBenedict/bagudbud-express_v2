@@ -316,7 +316,7 @@
                     dataType: "json",
                     success: function(res) {
                         if (res.code == 200) {
-                            alert(res.mssg);
+                            alert(res.msg);
                             //it should be clear the form inputs and alert a message
                         }
                         if (res.code == 404) {
@@ -325,6 +325,9 @@
                                 $(`#${key}`).next().text(val).removeClass('d-none');
                             });
                         }
+                    },
+                    error: function(err) {
+                        console.log(err.responseText)
                     }
                 });
             });

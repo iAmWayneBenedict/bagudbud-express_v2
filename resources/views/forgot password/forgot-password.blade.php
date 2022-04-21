@@ -28,8 +28,9 @@
                     <label for="confirmation-code"
                         class="form-label col-form-label col-form-label-sm display-7 fw-normal">Confirmation Code
                     </label>
-                    <input type="text" name="confirmation-code" class="form-control form-control-sm py-2 py-xxl-3 fw-light"
-                        id="confirmation-code" placeholder="Confirmation Code" disabled>
+                    <input type="number" name="confirmation-code"
+                        class="form-control form-control-sm py-2 py-xxl-3 fw-light" id="confirmation-code"
+                        placeholder="Confirmation Code" disabled>
                 </div>
 
 
@@ -69,27 +70,6 @@
                 // else, remove send code button and disabled property
                 $('#get-code').css('display', 'none')
                 $('#password, #confirmation-code, #confirm').removeAttr("disabled");
-            })
-
-            let temp = "";
-            $('#confirmation-code').keyup(function(event) {
-
-                // if the input field is empty, then reset temp variable and immediately exit the function
-                if (!$(this).val()) {
-                    temp = '';
-                    return;
-                }
-
-                // if the clicked key is not a number, then remove the latest character added
-                let rawData = $(this).val();
-                if (isNaN(parseInt(event.key))) {
-                    $(this).val(rawData.slice(0, this.value.length - 1));
-                    return;
-                }
-
-                // store to the temp variable the last char added
-                temp += $(this).val().charAt(this.value.length - 1);
-                $(this).val(temp);
             })
         })
     </script>
