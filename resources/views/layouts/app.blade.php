@@ -50,9 +50,6 @@
                 <!-- Side Links -->
                 <div class="d-flex align-items-center">
 
-                    <!-- Deliveries -->
-                    <a href="" class="nav-link" style="color: #000; padding: 0; margin-right: 2rem">Deliveries</a>
-
                     <!-- Hamburger -->
                     <button class="navbar-toggler" style="outline: none; border:none; background:none; box-shadow:none"
                         type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"

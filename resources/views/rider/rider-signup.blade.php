@@ -354,17 +354,23 @@
     <script>
         function barangayAddress(barangayList) {
             barangayList.map(function(data) {
+                // append option tag with a value of specific barangay in the DOM
                 $('#barangay-list').append(`<option value="${data}">`);
             });
         }
         $(() => {
             $('#municipality').change(async function() {
+                // fetch the locations data from locations.json file
                 let response = await fetch("{{ asset('json/locations.json') }}");
                 let data = await response.json();
 
+                // get the value inputed
                 let address = $(this).val();
+                // clear the datalist in barangay
                 $('#barangay-list').empty()
+                // clear input field
                 $('#barangay').val('')
+                //loop throught the object, then check if the inputed data is equal to the data found in json file
                 Object.entries(data).forEach(function([key, value]) {
                     if (key.toLowerCase() === address.toLowerCase()) {
                         barangayAddress(value);
